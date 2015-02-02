@@ -1,0 +1,15 @@
+# Ignore local configuration files.
+/.rspec
+/.ruby-gemset
+/.ruby-version
+
+# Ignore compiled gem files.
+*.gem
+.bundle
+Gemfile.lock
+gemfiles/*.lock
+
+# Ignore generated documentation.
+/doc
+.yardoc
+.yardopts
