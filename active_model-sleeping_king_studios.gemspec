@@ -22,4 +22,11 @@ Gem::Specification.new do |gem|
   gem.files        = Dir["lib/**/*.rb", "LICENSE", "*.md"]
 
   gem.add_runtime_dependency 'activemodel', '~> 4.2'
+
+  gem.add_development_dependency 'byebug', '~> 3.5',  '>= 3.5.1'
+  gem.add_development_dependency 'rake',   '~> 10.4', '>= 10.4.2'
+
+  gem.add_development_dependency 'rspec',                       '~> 3.1'
+  gem.add_development_dependency 'rspec-collection_matchers',   '~> 1.1', '>= 1.1.2'
+  gem.add_development_dependency 'rspec-sleeping_king_studios', '>= 2.0.0.rc.0'
 end # gemspec
