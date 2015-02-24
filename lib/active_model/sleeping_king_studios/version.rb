@@ -1,7 +1,6 @@
 # lib/active_model/sleeping_king_studios/version.rb
 
 module ActiveModel
-  # Hic Iacet Arthurus, Rex Quondam, Rexque Futurus.
   module SleepingKingStudios
     # @api private
     #
