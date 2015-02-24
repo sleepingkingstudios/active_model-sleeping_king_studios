@@ -23,8 +23,9 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'activemodel', '~> 4.2'
 
-  gem.add_development_dependency 'byebug', '~> 3.5',  '>= 3.5.1'
-  gem.add_development_dependency 'rake',   '~> 10.4', '>= 10.4.2'
+  gem.add_development_dependency 'appraisal', '~> 1.0',  '>= 1.0.2'
+  gem.add_development_dependency 'byebug',    '~> 3.5',  '>= 3.5.1'
+  gem.add_development_dependency 'rake',      '~> 10.4', '>= 10.4.2'
 
   gem.add_development_dependency 'rspec',                       '~> 3.1'
   gem.add_development_dependency 'rspec-collection_matchers',   '~> 1.1', '>= 1.1.2'

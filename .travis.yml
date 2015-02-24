@@ -4,4 +4,7 @@ language: ruby
 rvm:
 - 2.2.0
 gemfile:
-- Gemfile
+- gemfiles/core.gemfile
+- gemfiles/mongoid_4.gemfile
+services:
+- mongodb

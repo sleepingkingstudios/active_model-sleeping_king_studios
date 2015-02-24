@@ -10,6 +10,8 @@ require 'rspec/sleeping_king_studios/all'
 # spec/support/ and its subdirectories.
 Dir[File.join File.expand_path('.'), 'spec', 'support', '**', '*.rb'].each { |f| require f }
 
+Dir[File.dirname(__FILE__) + "/mappings/*.rb"].each { |file| require file }
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.disable_monkey_patching!
