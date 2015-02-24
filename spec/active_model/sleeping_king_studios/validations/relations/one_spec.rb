@@ -1,5 +1,7 @@
 # spec/active_model/sleeping_king_studios/validations/relations/one_spec.rb
 
+require 'spec_helper'
+
 require 'active_model/sleeping_king_studios/validations/relations/one'
 
 RSpec.describe ActiveModel::SleepingKingStudios::Validations::Relations::One do
