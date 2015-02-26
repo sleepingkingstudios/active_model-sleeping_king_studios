@@ -11,6 +11,51 @@ module ActiveModel::SleepingKingStudios::Validations
 
     # Extends model classes with methods for validating related models.
     module ClassMethods
+      # Configures model class to perform advanced processing on error messages
+      # from nested resources when generating full error messages.
+      def parse_relation_error_messages options = {}
+        serializer = ActiveModel::SleepingKingStudios::Validations::Relations::Serializers::BracketSerializer
+
+        class_methods = Module.new
+        class_methods.send :define_method, :human_attribute_name do |attribute, opts = {}|
+          return super(attribute, opts) unless attribute =~ /\[(\w*)\]/
+
+          serializer = ActiveModel::SleepingKingStudios::Validations::Relations::Serializers::BracketSerializer
+
+          ary      = []
+          segments = serializer.deserialize(attribute)
+
+          index = 0
+          while index < segments.count
+            indices = []
+            segment = segments[index]
+
+            index += 1 and next if segment == 'base'
+
+            next_segment = segments[index + 1]
+            while !next_segment.blank? && next_segment =~ /\A\d+\z/
+              indices << next_segment
+
+              index += 1
+              next_segment = segments[index + 1]
+            end # while
+
+            if indices.count > 0
+              ary << "#{super(segment).downcase.singularize << ' ' << indices.join(' ')}"
+            else
+              ary << super(segment).downcase
+            end # if-else
+
+            index += 1
+          end # while
+
+          ary.first.capitalize!
+          ary.join("'s ")
+        end # define_method
+
+        extend class_methods
+      end # class method parse_relation_error_messages
+
       # Configures model class to validate the specified relation and to fold
       # in error messages from failing relations to the primary model's #errors
       # instance.

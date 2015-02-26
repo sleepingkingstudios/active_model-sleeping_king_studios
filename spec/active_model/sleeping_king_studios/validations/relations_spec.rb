@@ -6,7 +6,39 @@ require 'active_model/sleeping_king_studios/validations/relations'
 require 'active_model/sleeping_king_studios/validations/relations/serializers/underscore_serializer'
 
 RSpec.describe ActiveModel::SleepingKingStudios::Validations::Relations do
-  let(:described_class) { Class.new.send(:include, ActiveModel::Validations).send(:include, super()) }
+  let(:described_class) do
+    klass = Class.new
+    klass.send :include, ActiveModel::Validations
+    klass.send :include, super()
+
+    allow(klass).to receive(:name).and_return('ValidationsRelationsExample')
+
+    klass
+  end # let
+
+  describe '::parse_relation_error_messages' do
+    it { expect(described_class).to respond_to(:parse_relation_error_messages).with(0..1).arguments }
+
+    before(:each) { described_class.parse_relation_error_messages }
+
+    describe 'with a simple attribute name' do
+      let(:attribute) { 'oxidizer' }
+      let(:expected)  { attribute.capitalize }
+
+      it '::human_attribute_name should return the attribute name' do
+        expect(described_class.human_attribute_name attribute).to be == expected
+      end # it
+    end # describe
+
+    describe 'with a compound attribute name' do
+      let(:attribute) { 'propellant[fuel_pump][compressor]' }
+      let(:expected)  { "Propellant's fuel pump's compressor" }
+
+      it '::human_attribute_name should return the attribute name' do
+        expect(described_class.human_attribute_name attribute).to be == expected
+      end # it
+    end # describe
+  end # describe
 
   describe '::validates_related_records' do
     it { expect(described_class).to respond_to(:validates_related_documents).with(1..2).arguments }

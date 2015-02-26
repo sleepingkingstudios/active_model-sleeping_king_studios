@@ -16,4 +16,6 @@ class Army
 
   validates_related_records :general
   validates_related_records :soldiers
+
+  parse_relation_error_messages
 end # class
